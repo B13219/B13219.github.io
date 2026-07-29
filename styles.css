@@ -319,7 +319,8 @@ nav > a:hover::after {
 }
 
 .project-card {
-  min-height: 500px;
+  grid-column: span 6;
+  min-height: 570px;
   padding: 28px;
   border: 1px solid var(--ink);
   display: flex;
@@ -335,18 +336,15 @@ nav > a:hover::after {
 }
 
 .project-card.blue {
-  grid-column: span 5;
   background: var(--blue);
   color: white;
 }
 
 .project-card.coral {
-  grid-column: span 3;
   background: var(--coral);
 }
 
 .project-card.lime {
-  grid-column: span 4;
   background: var(--lime);
 }
 
@@ -412,6 +410,74 @@ nav > a:hover::after {
   border: 1px solid currentColor;
   border-radius: 999px;
   font-size: 0.63rem;
+}
+
+.project-details {
+  margin-top: 26px;
+  border-top: 1px solid currentColor;
+}
+
+.project-details summary {
+  padding: 18px 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.74rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.project-details summary span {
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.project-details[open] summary span {
+  transform: rotate(45deg);
+}
+
+.case-study {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  padding: 26px 0 4px;
+}
+
+.case-study h4 {
+  margin: 0 0 8px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.case-study p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.case-study > a {
+  grid-column: 1 / -1;
+  width: max-content;
+  max-width: 100%;
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.case-study > a:hover {
+  opacity: 0.72;
 }
 
 .about {
@@ -631,6 +697,10 @@ footer a:hover {
 
   .project-card {
     padding: 22px;
+  }
+
+  .case-study {
+    grid-template-columns: 1fr;
   }
 
   .about {

@@ -127,7 +127,7 @@ document.querySelector("#booking-form").addEventListener("submit", (event) => {
   );
   document.querySelector("#form-message").textContent =
     "Opening your email app with the project details…";
-  window.location.href = `mailto:hello@vault.co.tz?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:rirovault@gmail.com?subject=${subject}&body=${body}`;
 });
 
 const supabaseUrl = "https://hxqsnztxokfemmysyjyw.supabase.co";

@@ -129,3 +129,106 @@ document.querySelector("#booking-form").addEventListener("submit", (event) => {
     "Opening your email app with the project details…";
   window.location.href = `mailto:hello@vault.co.tz?subject=${subject}&body=${body}`;
 });
+
+const supabaseUrl = "https://hxqsnztxokfemmysyjyw.supabase.co";
+const supabaseKey = "sb_publishable_eu-_vai9eG2R89we1eIlxw_Quzds9c9";
+const reviewReadApi =
+  `${supabaseUrl}/rest/v1/reviews_public?select=id,name,company,project,rating,review&order=approved_at.desc&limit=12`;
+const reviewSubmitApi = `${supabaseUrl}/rest/v1/review_submissions`;
+const reviewStack = document.querySelector("#review-stack");
+const reviewInvite = document.querySelector(".review-invite");
+const reviewEmpty = document.querySelector("#review-empty");
+const reviewForm = document.querySelector("#review-form");
+const reviewMessage = document.querySelector("#review-message");
+
+function createReviewCard(review, index) {
+  const card = document.createElement("article");
+  const number = String(index + 1).padStart(2, "0");
+  const stars = "★".repeat(Math.max(1, Math.min(5, Number(review.rating))));
+  const attribution = [review.company, review.project].filter(Boolean).join(" · ");
+  card.className = "review-card review-card-text";
+  card.style.top = `${80 + index * 18}px`;
+
+  const glow = document.createElement("div");
+  glow.className = "review-glow";
+  const count = document.createElement("div");
+  count.className = "review-number";
+  count.textContent = number;
+  const rating = document.createElement("div");
+  rating.className = "review-rating";
+  rating.setAttribute("aria-label", `${review.rating} out of 5 stars`);
+  rating.textContent = stars;
+  const copy = document.createElement("div");
+  copy.className = "review-copy";
+  const quote = document.createElement("blockquote");
+  quote.textContent = `“${review.review}”`;
+  const meta = document.createElement("div");
+  const name = document.createElement("strong");
+  name.textContent = review.name;
+  const project = document.createElement("span");
+  project.textContent = attribution;
+  meta.append(name, project);
+  copy.append(quote, meta);
+  card.append(glow, count, rating, copy);
+  return card;
+}
+
+fetch(reviewReadApi, { headers: { apikey: supabaseKey } })
+  .then((response) => (response.ok ? response.json() : []))
+  .then((reviews = []) => {
+    if (!reviews.length) return;
+    reviewEmpty.remove();
+    reviews.forEach((review, index) => {
+      reviewStack.insertBefore(createReviewCard(review, index), reviewInvite);
+    });
+  })
+  .catch(() => {});
+
+reviewForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const button = reviewForm.querySelector("button");
+  const data = new FormData(reviewForm);
+  button.disabled = true;
+
+  if (data.get("website")) {
+    reviewMessage.textContent =
+      "Thank you. Your words are with the studio and will appear after approval.";
+    reviewForm.reset();
+    button.disabled = false;
+    return;
+  }
+  reviewMessage.textContent = "Sending your review to the studio…";
+
+  try {
+    const response = await fetch(reviewSubmitApi, {
+      method: "POST",
+      headers: {
+        apikey: supabaseKey,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        name: data.get("name"),
+        company: data.get("company") || "",
+        email: data.get("email"),
+        project: data.get("project"),
+        rating: Number(data.get("rating")),
+        review: data.get("review"),
+        consent: data.get("consent") === "on",
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(
+        "We could not save your review. Please check the form and try again."
+      );
+    }
+    reviewMessage.textContent =
+      "Thank you. Your words are with the studio and will appear after approval.";
+    reviewForm.reset();
+  } catch (error) {
+    reviewMessage.textContent =
+      error.message || "We could not save your review. Please try again.";
+  } finally {
+    button.disabled = false;
+  }
+});

@@ -163,39 +163,56 @@
             <p class="eyebrow">Proof between the frames</p>
             <h2>The work matters. So does how it felt to make.</h2>
             <p>
-              Client reflections paired with the kind of story we made
-              together.
+              These words come directly from clients. Every review is verified
+              and published in the client’s own voice.
             </p>
           </div>
 
-          <div class="review-stack">
-            <article class="review-card" style="top: 80px">
-              <img src="https://images.unsplash.com/photo-1658046413536-6e5933dfd939?auto=format&fit=crop&q=85&w=1400" alt="" loading="lazy" />
-              <div class="review-shade"></div>
-              <div class="review-number">01</div>
-              <div class="review-copy">
-                <blockquote>“Vault found the honest story inside the brief—and made the whole process feel effortless.”</blockquote>
-                <div><strong>Campaign lead</strong><span>Brand campaign · Dar es Salaam</span></div>
+          <div class="review-stack" id="review-stack" aria-live="polite">
+            <div class="review-empty" id="review-empty">
+              <span>Client archive opening soon</span>
+              <p>We are inviting past collaborators to leave the first verified reflections.</p>
+            </div>
+
+            <div class="review-invite">
+              <div class="review-invite-head">
+                <p class="eyebrow">Worked with Vault?</p>
+                <h3>Leave the story in your own words.</h3>
+                <p>
+                  Your review is held for a quick authenticity check before it
+                  appears here. We never rewrite your words.
+                </p>
               </div>
-            </article>
-            <article class="review-card" style="top: 98px">
-              <img src="https://images.unsplash.com/photo-1527259693341-cbc6f91e4d6e?auto=format&fit=crop&q=85&w=1400" alt="" loading="lazy" />
-              <div class="review-shade"></div>
-              <div class="review-number">02</div>
-              <div class="review-copy">
-                <blockquote>“They moved quietly, caught the moments we missed, and delivered a body of work that still feels alive.”</blockquote>
-                <div><strong>Event producer</strong><span>Live culture · East Africa</span></div>
-              </div>
-            </article>
-            <article class="review-card" style="top: 116px">
-              <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=85&w=1400" alt="" loading="lazy" />
-              <div class="review-shade"></div>
-              <div class="review-number">03</div>
-              <div class="review-copy">
-                <blockquote>“The images gave our people dignity and presence. Nothing felt staged, but every frame felt considered.”</blockquote>
-                <div><strong>Programme director</strong><span>Documentary portrait · On location</span></div>
-              </div>
-            </article>
+              <form class="review-form" id="review-form">
+                <label>Your name *<input name="name" autocomplete="name" required maxlength="120" /></label>
+                <label>Company / organisation<input name="company" autocomplete="organization" maxlength="160" /></label>
+                <label>Email for verification *<input name="email" type="email" autocomplete="email" required maxlength="200" /></label>
+                <label>Project we made together *<input name="project" required maxlength="160" /></label>
+                <label>
+                  Your rating *
+                  <select name="rating" required>
+                    <option value="5">5 — Exceptional</option>
+                    <option value="4">4 — Very good</option>
+                    <option value="3">3 — Good</option>
+                    <option value="2">2 — Fair</option>
+                    <option value="1">1 — Needs improvement</option>
+                  </select>
+                </label>
+                <label class="review-full">
+                  Your review *
+                  <textarea name="review" rows="5" required minlength="30" maxlength="1600" placeholder="What stood out about the process and the finished work?"></textarea>
+                </label>
+                <label class="review-honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+                <label class="review-consent review-full">
+                  <input name="consent" type="checkbox" required />
+                  <span>I confirm this reflects my genuine experience and allow Vault to publish my name, organisation and review.</span>
+                </label>
+                <div class="review-action review-full">
+                  <p id="review-message">Your email is used for verification only and is never displayed.</p>
+                  <button type="submit">Submit review <span>↗</span></button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </section>

@@ -40,9 +40,8 @@ button, input, select, textarea { font: inherit; }
   border-bottom: 1px solid rgba(23,20,15,.09);
   color: #17140f;
 }
-.brand { display: inline-flex; width: max-content; flex-direction: column; gap: 7px; }
-.brand span { font-size: 1.5rem; font-weight: 800; letter-spacing: .32em; }
-.brand small { color: rgba(23,20,15,.45); font-size: .45rem; font-weight: 700; letter-spacing: .21em; }
+.brand { display: inline-flex; width: max-content; align-items: center; }
+.brand-logo { display: block; width: clamp(118px, 10vw, 146px); height: auto; }
 .nav nav { display: flex; gap: 35px; color: rgba(23,20,15,.58); font-size: .61rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .nav nav a { transition: color 180ms ease; }
 .nav nav a:hover { color: #17140f; }
@@ -301,8 +300,6 @@ button, input, select, textarea { font: inherit; }
 .closing h2 { max-width: 1100px; margin: 0 auto 45px; font-size: clamp(4rem, 8vw, 9rem); font-weight: 540; letter-spacing: -.08em; line-height: .84; }
 .closing a { color: #17130d; background: var(--gold); }
 .footer { display: grid; grid-template-columns: 1.5fr 1fr .7fr auto; gap: 45px; align-items: end; padding-block: 60px; color: rgba(255,255,255,.55); border-top: 1px solid var(--line); font-size: .7rem; }
-.footer .brand span { color: #fff; }
-.footer .brand small { color: rgba(255,255,255,.38); }
 .footer div { display: flex; flex-direction: column; gap: 9px; }
 .footer p { margin: 0; }
 .footer a:hover { color: var(--gold); }

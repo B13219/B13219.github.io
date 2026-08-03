@@ -6,6 +6,58 @@ const finalScene = document.querySelector(".motion-final");
 const progressBar = document.querySelector(".motion-progress b");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const caseStudy = document.querySelector("#exim-case-study");
+const caseStudyOpener = document.querySelector("[data-open-case-study]");
+const caseStudyCloseButtons = [...document.querySelectorAll("[data-close-case-study]")];
+let caseStudyPushedState = false;
+
+function openCaseStudy(updateHistory = true) {
+  if (!caseStudy) return;
+  caseStudy.classList.add("is-open");
+  caseStudy.setAttribute("aria-hidden", "false");
+  document.body.classList.add("case-study-open");
+  caseStudy.querySelector(".case-study-bar button")?.focus();
+  if (updateHistory && window.location.hash !== "#exim-bank") {
+    window.history.pushState({ caseStudy: true }, "", "#exim-bank");
+    caseStudyPushedState = true;
+  }
+}
+
+function closeCaseStudy(fromHistory = false) {
+  if (!caseStudy?.classList.contains("is-open")) return;
+  caseStudy.classList.remove("is-open");
+  caseStudy.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("case-study-open");
+  caseStudy.querySelector("video")?.pause();
+  if (!fromHistory && caseStudyPushedState && window.location.hash === "#exim-bank") {
+    caseStudyPushedState = false;
+    window.history.back();
+  } else if (!fromHistory && window.location.hash === "#exim-bank") {
+    window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#work`);
+  }
+  caseStudyOpener?.focus();
+}
+
+caseStudyOpener?.addEventListener("click", () => openCaseStudy());
+caseStudyCloseButtons.forEach((button) => button.addEventListener("click", () => closeCaseStudy()));
+window.addEventListener("popstate", () => {
+  if (window.location.hash === "#exim-bank") openCaseStudy(false);
+  else closeCaseStudy(true);
+});
+document.addEventListener("keydown", (event) => {
+  if (!caseStudy?.classList.contains("is-open")) return;
+  if (event.key === "Escape") closeCaseStudy();
+  if (event.key !== "Tab") return;
+  const focusable = [...caseStudy.querySelectorAll('button, a[href], video[controls], [tabindex]:not([tabindex="-1"])')]
+    .filter((element) => !element.hasAttribute("disabled"));
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
+if (window.location.hash === "#exim-bank") openCaseStudy(false);
+
 const gallery = document.querySelector(".project-gallery");
 if (gallery) {
   const slides = [...gallery.querySelectorAll(".gallery-viewport figure")];

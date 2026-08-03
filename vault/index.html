@@ -20,8 +20,8 @@
     <meta name="twitter:image" content="https://b13219.github.io/vault/vault-og.jpg" />
     <link rel="icon" href="./vault-mark.png" />
     <link rel="preconnect" href="https://images.unsplash.com" />
-    <link rel="stylesheet" href="./styles.css?v=20260803-work" />
-    <script src="./script.js?v=20260803-work" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20260803-slides" />
+    <script src="./script.js?v=20260803-slides" defer></script>
   </head>
   <body>
     <main>
@@ -156,32 +156,41 @@
             </video>
             <span class="featured-film-label">Highlight film · 01:56</span>
           </div>
-          <div class="project-gallery" aria-label="Exim Bank Town Hall photo gallery">
-            <figure class="gallery-wide">
-              <img src="./exim-townhall-stage.webp" alt="Speaker presenting at the Exim Bank Town Hall" loading="lazy" />
+          <section class="project-gallery" aria-roledescription="carousel" aria-label="Exim Bank Town Hall photo gallery" tabindex="0">
+            <div class="gallery-viewport" aria-live="polite">
+            <figure class="is-active" aria-hidden="false" data-caption="Ideas on stage">
+              <img src="./exim-townhall-stage.webp" alt="Speaker presenting at the Exim Bank Town Hall" data-alt="Speaker presenting at the Exim Bank Town Hall" loading="lazy" />
             </figure>
-            <figure class="gallery-portrait">
-              <img src="./exim-townhall-speaker.webp" alt="Exim Bank team member speaking into a microphone" loading="lazy" />
+            <figure aria-hidden="true" data-caption="Voices from the team">
+              <img src="./exim-townhall-speaker.webp" alt="" data-alt="Exim Bank team member speaking into a microphone" loading="lazy" />
             </figure>
-            <figure class="gallery-portrait">
-              <img src="./exim-townhall-audience.webp" alt="Attendee standing among guests at the Exim Bank event" loading="lazy" />
+            <figure aria-hidden="true" data-caption="Inside the audience">
+              <img src="./exim-townhall-audience.webp" alt="" data-alt="Attendee standing among guests at the Exim Bank event" loading="lazy" />
             </figure>
-            <figure class="gallery-wide">
-              <img src="./exim-townhall-arrival.webp" alt="Guest walking through the Town Hall audience" loading="lazy" />
+            <figure aria-hidden="true" data-caption="A shared moment">
+              <img src="./exim-townhall-arrival.webp" alt="" data-alt="Guest walking through the Town Hall audience" loading="lazy" />
             </figure>
-            <figure class="gallery-full">
-              <img src="./exim-townhall-awards.webp" alt="Exim Bank award recipients posing together on stage" loading="lazy" />
+            <figure aria-hidden="true" data-caption="Recognition">
+              <img src="./exim-townhall-awards.webp" alt="" data-alt="Exim Bank award recipients posing together on stage" loading="lazy" />
             </figure>
-            <figure class="gallery-wide">
-              <img src="./exim-townhall-presentation.webp" alt="Business presentation during the Exim Bank Town Hall" loading="lazy" />
+            <figure aria-hidden="true" data-caption="Progress in focus">
+              <img src="./exim-townhall-presentation.webp" alt="" data-alt="Business presentation during the Exim Bank Town Hall" loading="lazy" />
             </figure>
-            <figure class="gallery-wide">
-              <img src="./exim-townhall-presentation-wide.webp" alt="Wide view of an Exim Bank Town Hall presentation" loading="lazy" />
+            <figure aria-hidden="true" data-caption="The wider picture">
+              <img src="./exim-townhall-presentation-wide.webp" alt="" data-alt="Wide view of an Exim Bank Town Hall presentation" loading="lazy" />
             </figure>
-            <figure class="gallery-full">
-              <img src="./exim-townhall-celebration.webp" alt="Guests celebrating during the Exim Bank Town Hall" loading="lazy" />
+            <figure aria-hidden="true" data-caption="Celebration">
+              <img src="./exim-townhall-celebration.webp" alt="" data-alt="Guests celebrating during the Exim Bank Town Hall" loading="lazy" />
             </figure>
-          </div>
+            <div class="gallery-shade"></div>
+            <div class="gallery-caption"><span>01 / 08</span><p>Ideas on stage</p></div>
+            <div class="gallery-arrows">
+              <button type="button" data-gallery-prev aria-label="Previous photo">←</button>
+              <button type="button" data-gallery-next aria-label="Next photo">→</button>
+            </div>
+            </div>
+            <div class="gallery-dots" aria-label="Choose a photo"></div>
+          </section>
         </article>
         <div class="archive-label shell">
           <p class="eyebrow dark">The archive is growing</p>

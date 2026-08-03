@@ -20,8 +20,8 @@
     <meta name="twitter:image" content="https://b13219.github.io/vault/vault-og.jpg" />
     <link rel="icon" href="./vault-mark.png" />
     <link rel="preconnect" href="https://images.unsplash.com" />
-    <link rel="stylesheet" href="./styles.css?v=20260730-logo" />
-    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20260803-work" />
+    <script src="./script.js?v=20260803-work" defer></script>
   </head>
   <body>
     <main>
@@ -40,10 +40,20 @@
               <a href="#process">Studio</a>
               <a href="#book">Book a project</a>
             </nav>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+              <span></span><span></span><span class="sr-only">Toggle navigation</span>
+            </button>
             <a class="availability" href="#book">
               <i></i>
               Available for select projects
             </a>
+            <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+              <a href="#work">Work</a>
+              <a href="#reviews">Reviews</a>
+              <a href="#services">Services</a>
+              <a href="#process">Studio</a>
+              <a href="#book">Book a project</a>
+            </nav>
           </header>
 
           <div class="motion-intro shell">
@@ -122,41 +132,60 @@
         <div class="section-head shell">
           <div>
             <p class="eyebrow dark">Selected work</p>
-            <h2>Stories with a pulse.</h2>
+            <h2>Inside the story.</h2>
           </div>
-          <p>Campaign · Documentary · Culture · Portrait</p>
+          <p>Film · Photography · Corporate culture · Events</p>
         </div>
-        <div class="work-rail">
-          <article class="work-card">
-            <img src="https://images.unsplash.com/photo-1658046413536-6e5933dfd939?auto=format&fit=crop&q=85&w=1400" alt="Portrait from The Makers project" />
-            <div class="work-overlay"></div>
-            <div class="work-meta">
-              <span>Brand documentary</span>
-              <h3>The Makers</h3>
-              <p>Dar es Salaam</p>
+        <article class="featured-project">
+          <div class="featured-project-intro shell">
+            <div>
+              <span>01 / Corporate event</span>
+              <h3>Exim Bank<br />H1 2026 Town Hall</h3>
             </div>
-            <span class="work-arrow">↗</span>
-          </article>
-          <article class="work-card">
-            <img src="https://images.unsplash.com/photo-1527259693341-cbc6f91e4d6e?auto=format&fit=crop&q=85&w=1400" alt="Live culture photography from After Dark" loading="lazy" />
-            <div class="work-overlay"></div>
-            <div class="work-meta">
-              <span>Live culture</span>
-              <h3>After Dark</h3>
-              <p>East Africa</p>
+            <div class="featured-project-copy">
+              <p>
+                A film and photography story following the people, ideas and
+                shared moments behind Exim Bank's mid-year gathering.
+              </p>
+              <span>Dar es Salaam · 2026</span>
             </div>
-            <span class="work-arrow">↗</span>
-          </article>
-          <article class="work-card">
-            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=85&w=1400" alt="Editorial portrait from New Light" loading="lazy" />
-            <div class="work-overlay"></div>
-            <div class="work-meta">
-              <span>Editorial portrait</span>
-              <h3>New Light</h3>
-              <p>On location</p>
-            </div>
-            <span class="work-arrow">↗</span>
-          </article>
+          </div>
+          <div class="featured-film">
+            <video autoplay controls loop muted playsinline preload="metadata" poster="./exim-townhall-stage.webp" aria-label="Exim Bank H1 2026 Town Hall highlight film">
+              <source src="./exim-bank-highlight.mp4" type="video/mp4" />
+            </video>
+            <span class="featured-film-label">Highlight film · 01:56</span>
+          </div>
+          <div class="project-gallery" aria-label="Exim Bank Town Hall photo gallery">
+            <figure class="gallery-wide">
+              <img src="./exim-townhall-stage.webp" alt="Speaker presenting at the Exim Bank Town Hall" loading="lazy" />
+            </figure>
+            <figure class="gallery-portrait">
+              <img src="./exim-townhall-speaker.webp" alt="Exim Bank team member speaking into a microphone" loading="lazy" />
+            </figure>
+            <figure class="gallery-portrait">
+              <img src="./exim-townhall-audience.webp" alt="Attendee standing among guests at the Exim Bank event" loading="lazy" />
+            </figure>
+            <figure class="gallery-wide">
+              <img src="./exim-townhall-arrival.webp" alt="Guest walking through the Town Hall audience" loading="lazy" />
+            </figure>
+            <figure class="gallery-full">
+              <img src="./exim-townhall-awards.webp" alt="Exim Bank award recipients posing together on stage" loading="lazy" />
+            </figure>
+            <figure class="gallery-wide">
+              <img src="./exim-townhall-presentation.webp" alt="Business presentation during the Exim Bank Town Hall" loading="lazy" />
+            </figure>
+            <figure class="gallery-wide">
+              <img src="./exim-townhall-presentation-wide.webp" alt="Wide view of an Exim Bank Town Hall presentation" loading="lazy" />
+            </figure>
+            <figure class="gallery-full">
+              <img src="./exim-townhall-celebration.webp" alt="Guests celebrating during the Exim Bank Town Hall" loading="lazy" />
+            </figure>
+          </div>
+        </article>
+        <div class="archive-label shell">
+          <p class="eyebrow dark">The archive is growing</p>
+          <span>More commissioned stories will be added over time</span>
         </div>
       </section>
 
@@ -242,10 +271,10 @@
           <div class="status-orb"><i></i></div>
           <div>
             <p class="eyebrow">Current status</p>
-            <h2>Open for October commissions.</h2>
+            <h2>Now booking new commissions.</h2>
             <p>
-              September production is currently limited. Brief us now for
-              campaigns, events and stories from October onward.
+              Share your dates, scope and location. We will confirm availability
+              and the best production approach within one working day.
             </p>
           </div>
           <a class="light-button" href="#book">Check dates <span>↗</span></a>
@@ -260,8 +289,8 @@
             <div class="booking-status">
               <i></i>
               <div>
-                <strong>Accepting October dates</strong>
-                <span>Limited September availability.</span>
+                <strong>Project calendar open</strong>
+                <span>Dates are confirmed after a quick brief review.</span>
               </div>
             </div>
           </div>
@@ -310,8 +339,9 @@
               The brief *
               <textarea name="brief" rows="5" required placeholder="What are we making, who is it for, and where will it be seen?"></textarea>
             </label>
+            <label class="booking-honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
             <div class="form-action full">
-              <p id="form-message">This temporary Pages form prepares an email for the studio.</p>
+              <p id="form-message" aria-live="polite">Your enquiry will be saved securely and sent to the studio.</p>
               <button type="submit">Send the brief <span>↗</span></button>
             </div>
           </form>
@@ -335,9 +365,7 @@
           <a href="mailto:rirovault@gmail.com">rirovault@gmail.com</a>
         </div>
         <div>
-          <a href="#">Instagram</a>
-          <a href="#">Vimeo</a>
-          <a href="#">LinkedIn</a>
+          <p>Social portfolio coming soon</p>
         </div>
         <p>© 2026 Vault Studio</p>
       </footer>

@@ -105,9 +105,38 @@ render(current);
 addEventListener("scroll", update, { passive: true });
 addEventListener("resize", update);
 
-document.querySelector("#booking-form").addEventListener("submit", (event) => {
+const menuToggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.querySelector("#mobile-menu");
+
+menuToggle.addEventListener("click", () => {
+  const open = menuToggle.getAttribute("aria-expanded") === "true";
+  menuToggle.setAttribute("aria-expanded", String(!open));
+  mobileMenu.classList.toggle("is-open", !open);
+});
+
+mobileMenu.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    menuToggle.setAttribute("aria-expanded", "false");
+    mobileMenu.classList.remove("is-open");
+  });
+});
+
+addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  menuToggle.setAttribute("aria-expanded", "false");
+  mobileMenu.classList.remove("is-open");
+});
+
+const supabaseUrl = "https://hxqsnztxokfemmysyjyw.supabase.co";
+const supabaseKey = "sb_publishable_eu-_vai9eG2R89we1eIlxw_Quzds9c9";
+const bookingSubmitApi = `${supabaseUrl}/rest/v1/booking_submissions`;
+
+document.querySelector("#booking-form").addEventListener("submit", async (event) => {
   event.preventDefault();
-  const data = new FormData(event.currentTarget);
+  const form = event.currentTarget;
+  const button = form.querySelector("button");
+  const message = document.querySelector("#form-message");
+  const data = new FormData(form);
   const subject = encodeURIComponent(
     `Vault project enquiry — ${data.get("service") || "New project"}`
   );
@@ -125,13 +154,56 @@ document.querySelector("#booking-form").addEventListener("submit", (event) => {
       data.get("brief") || "",
     ].join("\n")
   );
-  document.querySelector("#form-message").textContent =
-    "Opening your email app with the project details…";
-  window.location.href = `mailto:rirovault@gmail.com?subject=${subject}&body=${body}`;
+  const fallback = `mailto:rirovault@gmail.com?subject=${subject}&body=${body}`;
+
+  if (data.get("website")) {
+    message.textContent = "Thank you. Your enquiry has been received.";
+    form.reset();
+    return;
+  }
+
+  const id = crypto.randomUUID();
+  button.disabled = true;
+  message.textContent = "Saving your project enquiry…";
+
+  try {
+    const response = await fetch(bookingSubmitApi, {
+      method: "POST",
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        id,
+        name: data.get("name"),
+        company: data.get("company") || "",
+        email: data.get("email"),
+        phone: data.get("phone") || "",
+        service: data.get("service"),
+        preferred_date: data.get("date") || null,
+        location: data.get("location") || "",
+        brief: data.get("brief"),
+      }),
+    });
+    if (!response.ok) throw new Error("Unable to save enquiry");
+
+    message.textContent = `Received — reference VLT-${id.slice(0, 8).toUpperCase()}. The studio will reply within one working day.`;
+    form.reset();
+  } catch {
+    message.replaceChildren(
+      document.createTextNode("We could not save this enquiry. "),
+      Object.assign(document.createElement("a"), {
+        href: fallback,
+        textContent: "Email the brief instead.",
+      })
+    );
+  } finally {
+    button.disabled = false;
+  }
 });
 
-const supabaseUrl = "https://hxqsnztxokfemmysyjyw.supabase.co";
-const supabaseKey = "sb_publishable_eu-_vai9eG2R89we1eIlxw_Quzds9c9";
 const reviewReadApi =
   `${supabaseUrl}/rest/v1/reviews_public?select=id,name,company,project,rating,review&order=approved_at.desc&limit=12`;
 const reviewSubmitApi = `${supabaseUrl}/rest/v1/review_submissions`;
